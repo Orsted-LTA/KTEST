@@ -1,0 +1,30 @@
+﻿@model IEnumerable<QuanLySinhVien.Models.HocPhan>
+
+<h2>Danh Sách Học Phần</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã Học Phần</th>
+            <th>Tên Học Phần</th>
+            <th>Số Tín Chỉ</th>
+            <th>Hành Động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var hocPhan in Model)
+        {
+            <tr>
+                <td>@hocPhan.MaHp</td>
+                <td>@hocPhan.TenHp</td>
+                <td>@hocPhan.SoTinChi</td>
+                <td>
+                    <form method="post" asp-action="DangKy" asp-controller="HocPhan">
+                        <input type="hidden" name="maHp" value="@hocPhan.MaHp" />
+                        <button type="submit" class="btn btn-primary">Đăng Ký</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

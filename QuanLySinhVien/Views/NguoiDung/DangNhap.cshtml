@@ -1,0 +1,22 @@
+﻿@model QuanLySinhVien.Models.DangNhapModel
+
+<div class="container mt-4">
+    <h2>Đăng Nhập</h2>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="MaSV">Mã Sinh Viên</label>
+            <input type="text" class="form-control" id="MaSV" name="MaSV" required />
+        </div>
+        <div class="form-group">
+            <label for="MatKhau">Mật Khẩu</label>
+            <input type="password" class="form-control" id="MatKhau" name="MatKhau" required />
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Đăng Nhập</button>
+    </form>
+
+    @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"] as string))
+    {
+        <div class="alert alert-danger mt-3">@ViewData["ErrorMessage"]</div>
+    }
+</div>

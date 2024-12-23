@@ -1,0 +1,53 @@
+﻿@model QuanLySinhVien.Models.SinhVien
+
+@{
+    ViewData["Title"] = "Xóa Sinh Viên";
+}
+
+<h1>XÓA THÔNG TIN</h1>
+
+<h4>Bạn có chắc chắn muốn xóa không?</h4>
+<hr />
+
+<div>
+    <h4>Sinh Viên:</h4>
+    <div class="form-group">
+        <label>MaSv:</label>
+        <span>@Model.MaSv</span>
+    </div>
+    <div class="form-group">
+        <label>HoTen:</label>
+        <span>@Model.HoTen</span>
+    </div>
+    <div class="form-group">
+        <label>GioiTinh:</label>
+        <span>@Model.GioiTinh</span>
+    </div>
+    <div class="form-group">
+        <label>NgaySinh:</label>
+        <span>@Model.NgaySinh?.ToString("d")</span>
+    </div>
+    <div class="form-group">
+        <label>Hình:</label>
+        @if (!string.IsNullOrEmpty(Model.Hinh))
+        {
+            <img src="@Url.Content(Model.Hinh)" alt="@Model.HoTen" style="width: 100px; height: auto;" />
+        }
+        else
+        {
+            <span>Chưa có hình</span>
+        }
+    </div>
+    <div class="form-group">
+        <label>MaNganh:</label>
+        <span>@Model.MaNganhNavigation?.TenNganh</span>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="MaSv" />
+    <div class="form-group">
+        <input type="submit" value="Xóa" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+    </div>
+</form>

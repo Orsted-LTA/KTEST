@@ -1,0 +1,52 @@
+﻿@model QuanLySinhVien.Models.SinhVien
+
+@{
+    ViewData["Title"] = "Thông tin chi tiết";
+}
+
+<h1>THÔNG TIN CHI TIẾT</h1>
+
+<div>
+    <h4>Sinh Viên</h4>
+    <hr />
+    <div class="form-group">
+        <label>MaSv:</label>
+        <span>@Model.MaSv</span>
+    </div>
+    <div class="form-group">
+        <label>HoTen:</label>
+        <span>@Model.HoTen</span>
+    </div>
+    <div class="form-group">
+        <label>GioiTinh:</label>
+        <span>@Model.GioiTinh</span>
+    </div>
+    <div class="form-group">
+        <label>NgaySinh:</label>
+        <span>@Model.NgaySinh?.ToString("d")</span>
+    </div>
+    <div class="form-group">
+        <label>Hình:</label>
+        @if (!string.IsNullOrEmpty(Model.Hinh))
+        {
+            <img src="@Url.Content(Model.Hinh)" alt="@Model.HoTen" style="width: 100px; height: auto;" />
+        }
+        else
+        {
+            <span>Chưa có hình</span>
+        }
+    </div>
+    <div class="form-group">
+        <label>MaNganh:</label>
+        <span>@Model.MaNganhNavigation?.TenNganh</span>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.MaSv" class="btn btn-primary">Chỉnh sửa</a>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</div>
+
+<footer>
+    <p>&copy; 2024 Your Name</p>
+</footer>

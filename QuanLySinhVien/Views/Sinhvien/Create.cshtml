@@ -1,0 +1,64 @@
+﻿@model QuanLySinhVien.Models.SinhVien
+
+@{
+    ViewData["Title"] = "Thêm Sinh Viên";
+}
+
+<h1>THÊM SINH VIÊN</h1>
+
+<h4>Sinh Viên</h4>
+<hr />
+
+<div>
+    <form asp-action="Create" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="MaSv" class="control-label"></label>
+            <input asp-for="MaSv" class="form-control" />
+            <span asp-validation-for="MaSv" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="HoTen" class="control-label"></label>
+            <input asp-for="HoTen" class="form-control" />
+            <span asp-validation-for="HoTen" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="GioiTinh" class="control-label"></label>
+            <select asp-for="GioiTinh" class="form-control">
+                <option value="">Chọn Giới Tính</option>
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+            </select>
+            <span asp-validation-for="GioiTinh" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="NgaySinh" class="control-label"></label>
+            <input asp-for="NgaySinh" class="form-control" type="date" />
+            <span asp-validation-for="NgaySinh" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Hình Ảnh</label>
+            <input type="file" name="hinh" class="form-control" multiple />
+            <span class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="MaNganh" class="control-label"></label>
+            <select asp-for="MaNganh" class="form-control" asp-items="ViewBag.MaNganh">
+                <option value="">Chọn Ngành</option>
+            </select>
+            <span asp-validation-for="MaNganh" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Tạo Mới" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<div>
+    <a asp-action="Index">Quay lại</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

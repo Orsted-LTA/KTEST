@@ -1,0 +1,58 @@
+﻿@model IEnumerable<QuanLySinhVien.Models.DangKy>
+
+<h2>Đăng Ký Học Phần</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã HP</th>
+            <th>Tên Học Phần</th>
+            <th>Số Tín Chỉ</th>
+            <th>Hành Động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dk in Model)
+        {
+            foreach (var hocPhan in dk.MaHps)
+            {
+                <tr>
+                    <td>@hocPhan.MaHp</td>
+                    <td>@hocPhan.TenHp</td>
+                    <td>@hocPhan.SoTinChi</td>
+                    <td>
+                        <form method="post" asp-action="XoaDangKy" asp-controller="GioHang">
+                            <input type="hidden" name="maSv" value="@dk.MaSv" />
+                            <input type="hidden" name="maHp" value="@hocPhan.MaHp" />
+                            <button type="submit" class="btn btn-danger">Xóa</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div>
+    <p><strong>Số học phần:</strong> <span class="text-danger">@Model.Sum(dk => dk.MaHps.Count())</span></p>
+    <p><strong>Tổng số tín chỉ:</strong> <span class="text-danger">@Model.Sum(dk => dk.MaHps.Sum(hp => hp.SoTinChi))</span></p>
+</div>
+
+<div>
+    <!-- Nút "Xóa Đăng Ký" -->
+    <form method="post" asp-action="XoaTatCaDangKy" asp-controller="GioHang">
+        <button type="submit" class="btn btn-warning">Xóa Đăng Ký</button> <!-- Nút Xóa tất cả -->
+    </form>
+
+    <!-- Nút "Lưu Đăng Ký" -->
+    <form method="post" asp-action="LuuDangKy" asp-controller="GioHang">
+        <button type="submit" class="btn btn-primary">Lưu đăng ký</button>
+    </form>
+
+    <!-- Quay lại danh sách học phần -->
+    <a href="@Url.Action("Index", "HocPhan")" class="btn btn-secondary">Quay lại Danh sách Học phần</a>
+</div>
+
+<footer class="mt-4">
+    <p>&copy; 2023 - Your Name</p>
+</footer>

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<QuanLySinhVien.Models.DangKy>
+
+<div class="container mt-4">
+    <h2>Giỏ Hàng Đặt Học Phần</h2>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-info">
+            @ViewBag.Message
+        </div>
+    }
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Mã Học Phần</th>
+                <th>Tên Học Phần</th>
+                <th>Số Tín Chỉ</th>
+                <th>Hành Động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var dk in Model)
+            {
+                foreach (var hocPhan in dk.MaHps)
+                {
+                    <tr>
+                        <td>@hocPhan.MaHp</td>
+                        <td>@hocPhan.TenHp</td>
+                        <td>@hocPhan.SoTinChi</td>
+                        <td>
+                            <form method="post" asp-action="XoaDangKy" asp-controller="GioHang">
+                                <input type="hidden" name="maSv" value="@dk.MaSv" />
+                                <input type="hidden" name="maHp" value="@hocPhan.MaHp" />
+                                <button type="submit" class="btn btn-danger">Xóa</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <div class="my-4">
+        <p><strong>Tổng số học phần: </strong><span class="text-danger">@Model.Sum(dk => dk.MaHps.Count())</span></p>
+        <p><strong>Tổng số tín chỉ: </strong><span class="text-danger">@Model.Sum(dk => dk.MaHps.Sum(hp => hp.SoTinChi))</span></p>
+    </div>
+
+    <h3>Thông tin Đăng Ký</h3>
+    <p><strong>Mã sinh viên:</strong> <span id="maSv">@Model.FirstOrDefault()?.MaSv</span></p>
+
+    <div>
+        <a href="@Url.Action("Index", "HocPhan")" class="btn btn-secondary">Quay lại Danh sách Học phần</a>
+    </div>
+</div>
+
+<footer class="mt-4">
+    <p>&copy; 2024 - Quản Lý Sinh Viên. Privacy</p>
+</footer>
